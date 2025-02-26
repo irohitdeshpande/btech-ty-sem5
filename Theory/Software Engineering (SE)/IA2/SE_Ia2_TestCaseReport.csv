@@ -1,0 +1,63 @@
+﻿Banking System,,,,,,
+Test Case #,Summary,Dependency,Pre-condition,Post-condition,Execution steps,Expected Output
+1,Verify that a registered user can log in with correct credentials.,None,User is registered in the system.,User is logged in.,"1. Open the login page.
+2. Enter valid user ID and password.
+3. Click the ""Login"" button.",User is directed to their account dashboard.
+2,Verify that an unregistered user cannot log in.,None,User is not registered.,User remains on the login page with an error message.,"1. Open the login page.
+2. Enter invalid user ID and password.
+3. Click the ""Login"" button.","Error message ""Invalid credentials"" is displayed"
+3,"Verify that a user is prompted with a ""Forgot Password"" option after three failed login attempts.",TC2,User has failed to log in twice,"""Forgot Password"" prompt appears.",Attempt to log in with incorrect credentials three times.,"User is shown a ""Forgot Password"" prompt."
+4,Verify that users cannot transfer amounts exceeding their current balance.,TC1,User has less than the transfer amount in their account.,Transfer fails with an error message,"1. Navigate to the ""Transfer"" section.
+2. Enter an amount higher than the current balance.
+3. Click ""Transfer"".","Error message ""Insufficient funds"" is displayed."
+5,Verify that users can reset their password via a security question.,TC3,User has set up security questions.,Password is reset.,"1. Click ""Forgot Password"" on the login page.
+2. Answer the security question.
+3. Enter a new password and confirm.",Password reset confirmation message is displayed
+6,Verify that users receive an email confirmation after successful fund transfer.,TC4,User is logged in and completes a fund transfer.,Confirmation email is received.,"1. Complete a fund transfer.
+2. Check the registered email for a confirmation message.",Email with transfer details is received.
+7,Verify that users can view transaction history.,TC1,User is logged in.,Transaction history is displayed.,"1. Navigate to ""Transaction History"".
+2. View the list of past transactions.",A list of all past transactions is displayed.
+8,Verify that session times out after 10 minutes of inactivity.,TC1,User is logged in.,User is logged out after timeout.,"1. Log in to the account.
+2. Leave the session idle for 10 minutes.",User is logged out automatically with a session timeout message.
+9,Verify that users cannot enter a future date for transaction history filtering.,TC7,User is logged in.,Future dates are restricted in the filter.,"1. Go to ""Transaction History"".
+2. Attempt to filter by a future date.","Error message ""Date cannot be in the future"" is displayed."
+10,Verify that the system encrypts password data for user accounts.,None,User account is created with a password.,Password is stored in encrypted format.,"1. Create a new user account with a password.
+2. Check the database to confirm password encryption.",Password is stored in encrypted format in the database.
+11,Verify that users cannot withdraw below the minimum account balance limit.,TC4,User's account balance is just above the minimum balance.,Withdrawal fails with an error.,Attempt to withdraw an amount that would take the balance below the minimum limit.,"Error message ""Cannot withdraw below minimum balance"" is displayed."
+12,Verify that the system logs out the user after password change.,TC5,User changes their password.,User is logged out and must log in with the new password.,"1. Change the password.
+2. Attempt to perform actions without logging in again.",User is prompted to log in again.
+13,Verify that users can update personal information.,TC1,User is logged in.,Updated information is saved.,"1. Go to ""Account Settings"".
+2. Update personal information.
+3. Save changes.",Changes are saved and reflected on the account.
+14,"Verify that the ""Lock Account"" feature works after 5 failed login attempts.",TC2,User has failed to log in four times.,Account is locked.,Enter incorrect credentials five times.,"""Account locked"" message is displayed."
+15,Verify that users can download transaction history.,TC7,User has a transaction history.,Transaction history is downloaded as a file.,"1. Go to ""Transaction History"".
+2. Click ""Download"" button.",ransaction history is downloaded as a PDF or CSV.
+16,"Verify that users receive an OTP on mobile during sensitive actions (e.g., money transfer).",TC4,User is logged in.,OTP is received on registered mobile number.,"1. Initiate a sensitive transaction.
+2. Check mobile for OTP.",OTP is received on mobile and used for verification.
+17,Verify that users can view and manage recurring payments.,None,User has set up a recurring payment.,Recurring payment settings are viewable and editable.,"1. Go to ""Recurring Payments"" section.
+2. View and edit recurring payments.","Recurring payment details are displayed, and changes can be made."
+18,Verify that users are warned about approaching overdraft limits.,TC4,User’s account balance is close to the overdraft limit.,Warning message is displayed.,Attempt to make a transaction that approaches overdraft limit.,"""Warning: Approaching overdraft limit"" message is displayed."
+19,Verify that users cannot update their email without re-entering their password.,TC1,User is logged in,Email update succeeds only with correct password,"1. Go to ""Account Settings"".
+2. Update email without entering password.",Prompt for password confirmation before changing email.
+20,Verify that all transactions are logged with a timestamp.,TC4,User performs a transaction.,Transaction timestamp is stored in the system.,"1. Complete a transaction.
+2. Check transaction details for timestamp.",Timestamp is recorded for each transaction.
+21,Verify that the mobile banking app requires re-authentication if minimized for over 5 minutes.,TC1,User has logged in.,User must re-authenticate after the app is minimized for 5 minutes.,"1. Minimize the app for 5 minutes.
+2. Open the app again.",App requires re-authentication.
+22,Verify that users can set custom alerts for low balances,TC1,User is logged in.,Low balance alerts are active.,"1. Go to ""Alert Settings"".
+2. Set a custom low balance threshold.",User receives alerts when balance falls below threshold.
+23,"Verify that ""two-factor authentication"" is required for login from a new device.",TC1,User attempts login from an unrecognized device.,User must verify identity with two-factor authentication.,Log in from a new device.,Two-factor authentication prompt appears.
+24,Verify that users can apply for a loan through the banking system.,TC1,User is logged in.,Loan application is submitted.,"1. Go to ""Loan Application"".
+2. Complete and submit the application.",Confirmation message for loan application is displayed.
+25,Verify that users receive notifications for failed login attempts.,TC2,User has attempted login multiple times unsuccessfully,Notification for failed login attempts is sent.,Attempt login multiple times with incorrect credentials.,User receives a notification about failed login attempts.
+26,Verify that users can view transaction history for the past six months.,TC7,User has at least one transaction in the last six months.,Six months of transaction history is displayed.,"1. Log in to the banking system.
+2. Navigate to ""Transaction History.""
+3. Set the date range to the past six months.",User can view all transactions from the last six months.
+27,Verify that users can update their registered phone number after authentication.,TC19,User is logged in and authenticated,Registered phone number is updated successfully.,"1. Go to ""Account Settings.""
+2. Select the option to update the phone number.
+3. Enter the new phone number and complete authentication.","Phone number is updated, and a confirmation message is sent to the user."
+28,Verify that the system prevents overdrafts if the account balance is insufficient for a transaction.,TC4,Account balance is lower than the transaction amount,Transaction is declined due to insufficient funds,Attempt to make a transaction that exceeds the current account balance.,"Transaction is declined, and a message stating ""Insufficient funds"" is displayed."
+29,Verify that the banking system supports multi-language options for users.,TC1,User is logged in.,User interface displays in the selected language.,"1. Go to ""Settings.""
+2. Select a different language from the language options.
+3. Save changes.",Banking system interface updates to display in the selected language.
+30,Verify that users receive a notification when a scheduled payment is processed.,TC17,User has a scheduled payment set up.,User receives a notification once the scheduled payment is processed.,"1. Set up a scheduled payment.
+2. Wait for the scheduled payment date.",User receives a notification confirming that the payment has been processed.
